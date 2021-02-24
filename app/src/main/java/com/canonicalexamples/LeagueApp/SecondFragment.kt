@@ -1,4 +1,4 @@
-package com.canonicalexamples.tearank
+package com.canonicalexamples.LeagueApp
 
 import android.os.Bundle
 import android.view.LayoutInflater
