@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/greyBg"
-    tools:context=".LeagueActivity">
+    tools:context=".view.LeagueActivity">
 
     <!-- 
     <com.google.android.material.appbar.AppBarLayout
@@ -22,20 +22,20 @@
             app:popupTheme="@style/Theme.TeaRank.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
     -->
-
-
+    <!--
+    <include layout="@layout/activity_server_panel" />
+    -->
     <ImageButton
         android:id="@+id/serverDisplay"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
         android:background="@color/greyBg"
         android:scaleType="fitCenter"
         android:src="@drawable/euw"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/infoButton"
@@ -45,7 +45,7 @@
         android:layout_marginEnd="8dp"
         android:background="@color/greyBg"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_information"
+        app:srcCompat="@drawable/ic_information"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,15 +60,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,26 +1,27 @@
-package com.canonicalexamples.LeagueApp
+package com.canonicalexamples.leagueApp.view
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+import androidx.navigation.findNavController
+import com.canonicalexamples.leagueApp.R
+import com.canonicalexamples.leagueApp.databinding.ActivityLeagueBinding
 
 class LeagueActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityLeagueBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_league)
+        //setContentView(R.layout.activity_league)
+        binding =  ActivityLeagueBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        
         //setSupportActionBar(findViewById(R.id.toolbar))
         //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         //actionBar?.hide()
-
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

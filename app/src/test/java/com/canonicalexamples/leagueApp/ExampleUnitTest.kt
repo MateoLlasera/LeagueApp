@@ -1,4 +1,4 @@
-package com.canonicalexamples.LeagueApp
+package com.canonicalexamples.leagueApp
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
