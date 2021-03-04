@@ -1,10 +1,14 @@
 package com.canonicalexamples.leagueApp.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.canonicalexamples.leagueApp.R
 import com.canonicalexamples.leagueApp.databinding.ActivityLeagueBinding
 
@@ -18,7 +22,11 @@ class LeagueActivity : AppCompatActivity() {
         binding =  ActivityLeagueBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        
+        binding.serverDisplay.setOnClickListener{
+            val intent = Intent(this, ServerPanelActivity::class.java)
+            startActivity(intent)
+        }
+
         //setSupportActionBar(findViewById(R.id.toolbar))
         //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         //actionBar?.hide()

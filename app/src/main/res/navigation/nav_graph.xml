@@ -3,26 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+    app:startDestination="@id/serverSelectionFragment">
+    <activity
+        android:id="@+id/leagueActivity"
+        android:name="com.canonicalexamples.leagueApp.view.LeagueActivity"
+        android:label="activity_league"
+        tools:layout="@layout/activity_league" />
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.canonicalexamples.leagueApp.view.AddAccFrag"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/serverSelectionFragment"
+        android:name="com.canonicalexamples.leagueApp.view.ServerSelectionFragment"
+        android:label="fragment_server_selection"
+        tools:layout="@layout/fragment_server_selection" >
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.canonicalexamples.leagueApp.view.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_serverSelectionFragment_to_leagueActivity"
+            app:destination="@id/leagueActivity" />
     </fragment>
 </navigation>

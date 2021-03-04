@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
+    <!--
     <TextView
         android:id="@+id/server_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
@@ -20,7 +20,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="League Server"
-        tools:textAlignment="center"
+        android:gravity="center"
+        android:background="@drawable/rounded_corner"/>-->
+    <!-- androidx.appcompat.widget.AppCompatButton -->
+    <Button
+        android:id="@+id/button_server"
+        android:layout_width="390dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="League Server"
+        android:gravity="center"
         android:background="@drawable/rounded_corner"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
