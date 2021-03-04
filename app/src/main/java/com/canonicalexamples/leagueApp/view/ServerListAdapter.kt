@@ -14,24 +14,31 @@ class ServerListAdapter(private val viewModel: ServerListViewModel): RecyclerVie
     /**
      * Variables del objeto
      */
-    inner class ServerItemViewHolder(binding: ServerItemBinding): RecyclerView.ViewHolder(binding.root){
+    class ServerItemViewHolder(private val viewModel: ServerListViewModel, binding: ServerItemBinding): RecyclerView.ViewHolder(binding.root){
+        //View.OnClickListener{
         val serverName = binding.buttonServer
         var serverNumber = -1
+        var serverHost = ""
 
         init {
-            itemView.setOnClickListener{ v: View ->
+            //binding.root.setOnClickListener(this)
+            itemView.setOnClickListener{
                 val position: Int = adapterPosition
-                Toast.makeText(itemView.context, "You clicked on item # ${position + 1}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(itemView.context, "You clicked on item # ${viewModel.getItem(position).serverName}", Toast.LENGTH_SHORT).show()
                 viewModel.serverButtonClicked()
             }
         }
+
+        /*override fun onClick(p0: View?) {
+            viewModel.onClickItem(layoutPosition)
+        }*/
     }
 
     /**
      * Creacion cuando se llama, devuelve el objeto
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServerItemViewHolder =
-        ServerItemViewHolder(ServerItemBinding.inflate(LayoutInflater.from(parent.context)))
+        ServerItemViewHolder(viewModel, ServerItemBinding.inflate(LayoutInflater.from(parent.context)))
 
     /**
      * Lo que se va a ensenar en el viewHolder
@@ -39,7 +46,8 @@ class ServerListAdapter(private val viewModel: ServerListViewModel): RecyclerVie
     override fun onBindViewHolder(holder: ServerItemViewHolder, position: Int) {
         val item = viewModel.getItem(position)
         holder.serverName.text = item.serverName
-        holder.serverNumber = item.serverNumber
+        holder.serverNumber = item.serverId
+        holder.serverHost = item.serverHost
     }
 
     override fun getItemCount(): Int = viewModel.numberOfItems

@@ -11,14 +11,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.canonicalexamples.leagueApp.R
+import com.canonicalexamples.leagueApp.app.LeagueAppApp
 import com.canonicalexamples.leagueApp.databinding.ActivityServerPanelBinding
 import com.canonicalexamples.leagueApp.databinding.FragmentServerSelectionBinding
+import com.canonicalexamples.leagueApp.model.Server
 import com.canonicalexamples.leagueApp.viewmodels.ServerListViewModel
+import com.canonicalexamples.leagueApp.viewmodels.ServerListViewModelFactory
 
 class ServerSelectionFragment : Fragment() {
 
     private lateinit var binding: FragmentServerSelectionBinding
-    private val viewModel: ServerListViewModel by viewModels()
+    private val viewModel: ServerListViewModel by viewModels{
+        ServerListViewModelFactory((activity?.application as LeagueAppApp).database)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
