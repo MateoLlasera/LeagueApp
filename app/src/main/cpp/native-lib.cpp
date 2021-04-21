@@ -7,7 +7,7 @@
 extern "C" JNIEXPORT jstring
 
 JNICALL
-Java_com_canonicalexamples_leagueApp_Keys_apiKey(JNIEnv *env, jobject object) {
-    std::string api_key = "your_api_key_goes_here";
+Java_com_canonicalexamples_leagueApp_model_Keys_apiKey(JNIEnv *env, jobject object) {
+    std::string api_key = "hehehehe";
     return env->NewStringUTF(api_key.c_str());
 }
