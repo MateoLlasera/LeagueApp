@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.canonicalexamples.leagueApp">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".app.LeagueAppApp"
         android:allowBackup="true"
@@ -23,6 +25,17 @@
         <activity
             android:name=".view.ServerPanelActivity"
             android:theme="@style/Theme.LeagueApp.NoActionBar">
+        </activity>
+        <activity
+            android:name=".view.SummonerFinderActivity"
+            android:parentActivityName=".view.LeagueActivity"
+            android:label="">
+        </activity>
+        <activity
+            android:name=".view.SummonerDisplayActivity"
+            android:parentActivityName=".view.SummonerFinderActivity"
+            android:label=""
+            >
         </activity>
     </application>
 

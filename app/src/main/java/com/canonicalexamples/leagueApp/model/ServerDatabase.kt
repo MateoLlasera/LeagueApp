@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Server::class], version = 1, exportSchema = false)
+@Database(entities = [Server::class, Summoner::class], version = 6, exportSchema = false)
 abstract class ServerDatabase: RoomDatabase() {
     abstract val serverDao: ServerDao
+    abstract val summonerDao: SummonerDao
 
     companion object {
         @Volatile

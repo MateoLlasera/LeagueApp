@@ -3,19 +3,22 @@ package com.canonicalexamples.leagueApp.viewmodels
 import androidx.lifecycle.*
 import com.canonicalexamples.leagueApp.model.Server
 import com.canonicalexamples.leagueApp.model.ServerDatabase
+import com.canonicalexamples.leagueApp.model.SummonerService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.await
 
 class ServerListViewModel(private val database: ServerDatabase): ViewModel() {
+    private var _serverSelected: MutableLiveData<String> = MutableLiveData("")
+    var serverSelected: LiveData<String> = _serverSelected
     private var _navigate: MutableLiveData<Boolean> = MutableLiveData(false)
     var navigate: LiveData<Boolean> = _navigate
 
-    //private val serverList = listOf("Europe West", "Europe Nordic", "LA North", "Korea", "Oceania", "Russia", "Japan", "Brazil", "Turkey", "North America", "LA South")
     private var serverList: List<Server> = listOf()
 
     init{
         viewModelScope.launch(Dispatchers.IO) {
-            serverList = database.serverDao.fecthServers()
+            serverList = database.serverDao.fetchServers()
         }
     }
 
@@ -31,11 +34,11 @@ class ServerListViewModel(private val database: ServerDatabase): ViewModel() {
     fun getItem(n: Int) = Item(serverName = serverList[n].serverName, serverId = serverList[n].serverId, serverHost = serverList[n].serverHost)
 
     fun serverButtonClicked(){
-            _navigate.value = true
+        _navigate.value = true
     }
 
-    fun onClickItem(position: Int) {
-        println("Item $position clicked")
+    fun setSelectedServer(serverHostString: String){
+        _serverSelected.value = serverHostString
     }
 }
 

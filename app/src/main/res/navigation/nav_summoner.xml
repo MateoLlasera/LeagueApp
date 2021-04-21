@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_summoner"
+    app:startDestination="@id/summonerSelectorFragment2">
+    <fragment
+        android:id="@+id/summonerSelectorFragment2"
+        android:name="com.canonicalexamples.leagueApp.view.SummonerSelectorFragment"
+        android:label="fragment_summoner_selector"
+        tools:layout="@layout/fragment_summoner_selector" />
+</navigation>

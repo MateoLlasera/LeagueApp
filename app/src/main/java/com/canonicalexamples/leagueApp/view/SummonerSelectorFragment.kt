@@ -1,24 +1,25 @@
 package com.canonicalexamples.leagueApp.view
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.canonicalexamples.leagueApp.app.LeagueAppApp
-import com.canonicalexamples.leagueApp.databinding.FragmentServerSelectionBinding
-import com.canonicalexamples.leagueApp.viewmodels.ServerListViewModel
-import com.canonicalexamples.leagueApp.viewmodels.ServerListViewModelFactory
+import com.canonicalexamples.leagueApp.databinding.ActivityServerPanelBinding
+import com.canonicalexamples.leagueApp.databinding.FragmentSummonerSelectorBinding
+import com.canonicalexamples.leagueApp.viewmodels.SummonerFinderViewModel
+import com.canonicalexamples.leagueApp.viewmodels.SummonerFinderViewModelFactory
 
-class ServerSelectionFragment : Fragment() {
+class SummonerSelectorFragment : Fragment() {
 
-    private lateinit var binding: FragmentServerSelectionBinding
-    private val viewModel: ServerListViewModel by viewModels{
+    private lateinit var binding: FragmentSummonerSelectorBinding
+
+    private val viewModel: SummonerFinderViewModel by viewModels{
         val app = activity?.application as LeagueAppApp
-        ServerListViewModelFactory(app.database)
+        SummonerFinderViewModelFactory(app.database)
     }
 
     override fun onCreateView(
@@ -26,17 +27,16 @@ class ServerSelectionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentServerSelectionBinding.inflate(inflater, container, false)
+        binding = FragmentSummonerSelectorBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //viewModel = ViewModelProvider(this).get(ServerListViewModel::class.java)
 
-        binding.recyclerViewServers.adapter = ServerListAdapter(viewModel)
+        binding.recyclerViewSummoners.adapter = SummonerListAdapter(viewModel)
 
-        viewModel.navigate.observe(viewLifecycleOwner) { navigate ->
+        /*viewModel.navigate.observe(viewLifecycleOwner) { navigate ->
             if (navigate) {
                 val returnIntent: Intent = Intent()
                 returnIntent.putExtra("host_name", viewModel.serverSelected.value)
@@ -44,6 +44,7 @@ class ServerSelectionFragment : Fragment() {
                 activity?.setResult(Activity.RESULT_OK, returnIntent)
                 activity?.finish()
             }
-        }
+        }*/
     }
+
 }

@@ -13,9 +13,5 @@
         android:id="@+id/serverSelectionFragment"
         android:name="com.canonicalexamples.leagueApp.view.ServerSelectionFragment"
         android:label="fragment_server_selection"
-        tools:layout="@layout/fragment_server_selection" >
-        <action
-            android:id="@+id/action_serverSelectionFragment_to_leagueActivity"
-            app:destination="@id/leagueActivity" />
-    </fragment>
+        tools:layout="@layout/fragment_server_selection" />
 </navigation>

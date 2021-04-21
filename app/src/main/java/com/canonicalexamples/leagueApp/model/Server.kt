@@ -8,8 +8,6 @@ data class Server (
     @PrimaryKey(autoGenerate = true)
     val serverId: Int = 0,
     val serverName: String = "",
-    val serverHost: String = ""
-){
-    val isValid: Boolean
-        get() = serverName.isNotEmpty() && serverHost.isNotEmpty() && serverId >= 0
-}
+    val serverHost: String = "",
+    val serverShort: String = ""
+)
