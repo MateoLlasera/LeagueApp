@@ -18,7 +18,6 @@ import com.canonicalexamples.leagueApp.viewmodels.SummonerFinderViewModelFactory
 
 class SummonerFinderActivity: AppCompatActivity(){
     private lateinit var binding: ActivitySummonerFinderBinding
-    private lateinit var sumName: String
 
     private val viewModel: SummonerFinderViewModel by viewModels{
         val app = application as LeagueAppApp
@@ -34,12 +33,13 @@ class SummonerFinderActivity: AppCompatActivity(){
         loadData()
         println("*******************************************************")
         println("Server and host: " + viewModel.serverSelected.value + " " + viewModel.serverSelectedHostShort.value)
-
+        resources.getIdentifier("icon_0", "", packageName)
 
         viewModel.navigate.observe(this){ navigate ->
             var aux = loadSummonerName()
-            if(aux.isNullOrEmpty()){
 
+            if(aux.isNullOrEmpty()){
+                //Should never happen
             }else{
                 var containsSummoner: Boolean = viewModel.containsSummoner(aux)
                 println("Summoner name is " + aux)
@@ -49,8 +49,6 @@ class SummonerFinderActivity: AppCompatActivity(){
 
             if(navigate){
                 val intent = Intent(this, SummonerDisplayActivity::class.java)
-                intent.putExtra("serverHost", viewModel.serverSelected.value)
-                intent.putExtra("serverHostShort", viewModel.serverSelectedHostShort.value)
                 startActivity(intent)
             }
         }

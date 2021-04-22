@@ -34,7 +34,7 @@ class SummonerSelectorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerViewSummoners.adapter = SummonerListAdapter(viewModel)
+        binding.recyclerViewSummoners.adapter = SummonerListAdapter(viewModel, this.context)
 
         /*viewModel.navigate.observe(viewLifecycleOwner) { navigate ->
             if (navigate) {

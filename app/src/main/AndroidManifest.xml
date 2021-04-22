@@ -33,8 +33,7 @@
         </activity>
         <activity
             android:name=".view.SummonerDisplayActivity"
-            android:parentActivityName=".view.SummonerFinderActivity"
-            android:label=""
+            android:theme="@style/Theme.LeagueApp.NoActionBar"
             >
         </activity>
     </application>

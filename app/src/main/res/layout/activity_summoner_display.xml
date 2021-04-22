@@ -5,19 +5,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/greyBg"
     tools:context=".view.SummonerDisplayActivity">
 
-    <Button
-        android:id="@+id/button_return"
+    <ImageButton
+        android:id="@+id/return_finder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="237dp"
-        android:layout_marginEnd="166dp"
-        android:layout_marginBottom="318dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/greyBg"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+
+    <ImageView
+        android:id="@+id/summoner_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/icon_background"
+        android:padding="4dp"
+        android:src="@drawable/icon_0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/return_finder" />
+
+    <TextView
+        android:id="@+id/summoner_level"
+        android:layout_width="45dp"
+        android:layout_height="20dp"
+        android:background="@drawable/level_background"
+        android:textAlignment="center"
+        android:text="10000"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/summoner_icon"
+        app:layout_constraintEnd_toEndOf="@+id/summoner_icon"
+        app:layout_constraintStart_toStartOf="@+id/summoner_icon"
+        />
+
+    <TextView
+        android:id="@+id/summoner_name_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="64dp"
+        android:text="El mayor manco"
+        android:textColor="@color/white"
+        android:textSize="35dp"
+        app:layout_constraintStart_toEndOf="@+id/summoner_icon"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

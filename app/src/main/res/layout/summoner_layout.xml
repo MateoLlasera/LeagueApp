@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/summoner_card"
-    android:layout_width="match_parent"
+    android:layout_width="200dp"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
+    android:layout_margin="10dp"
     android:clickable="true"
     android:focusable="true"
     app:cardBackgroundColor="@color/blueLeague"
@@ -20,12 +20,29 @@
 
         <ImageView
             android:id="@+id/summoner_icon"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/icon_0" />
+
+        <TextView
+            android:id="@+id/summoner_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:src="@mipmap/icon_0"
-            />
+            android:layout_alignStart="@+id/summoner_icon"
+            android:layout_alignEnd="@+id/summoner_icon"
+            android:layout_alignBottom="@+id/summoner_icon"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="-6dp"
+            android:background="@drawable/level_background"
+            android:text="10000"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:id="@+id/summoner_info"
@@ -64,10 +81,9 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_baseline_star_border_24"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@id/summoner_info"
+            android:layout_toStartOf="@id/go_next"
+            android:layout_marginEnd="20dp"
             android:background="@color/blueLeague"
-
             />
 
         <ImageButton
@@ -76,9 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_toEndOf="@id/fav"
             android:background="@color/blueLeague"
             app:srcCompat="@drawable/ic_baseline_arrow_forward_24" />
 

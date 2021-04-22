@@ -1,6 +1,7 @@
 package com.canonicalexamples.leagueApp.viewmodels
 
 import androidx.lifecycle.*
+import com.canonicalexamples.leagueApp.model.Keys
 import com.canonicalexamples.leagueApp.model.ServerDatabase
 import com.canonicalexamples.leagueApp.model.Summoner
 import com.canonicalexamples.leagueApp.model.SummonerService
@@ -79,7 +80,8 @@ class SummonerFinderViewModel(private val database: ServerDatabase): ViewModel()
         val summonerService = createSummonerService(serverSelected.value)
         var searchSummoner: Summoner?
         var contained: Boolean = false
-        summonerService.getSummonerAPI(givenSummoner).enqueue(object: Callback<Summoner> {
+        val API = Keys.apiKey()
+        summonerService.getSummonerAPI(givenSummoner, API).enqueue(object: Callback<Summoner> {
             override fun onResponse(call: Call<Summoner>?, response: Response<Summoner>?) {
                 searchSummoner = response?.body()
                 //println(searchSummoner)
@@ -124,10 +126,13 @@ class SummonerFinderViewModel(private val database: ServerDatabase): ViewModel()
         get() = summonerList.count()
 
     data class ItemSumm(
-        val name: String
+        val name: String,
+        val serverShort: String,
+        val profileIconID: Int?,
+        val summonerLevel: Long?
     )
 
-    fun getItem(n: Int) = ItemSumm(name = summonerList[n].name)
+    fun getItem(n: Int) = ItemSumm(name = summonerList[n].name, serverShort = summonerList[n].region, profileIconID = summonerList[n].profileIconId, summonerLevel = summonerList[n].summonerLevel)
 
     fun loadData(savedServer: String?, savedShort: String?){
         _serverSelected.value = savedServer

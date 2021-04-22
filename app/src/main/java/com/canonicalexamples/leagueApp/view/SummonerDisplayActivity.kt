@@ -1,6 +1,7 @@
 package com.canonicalexamples.leagueApp.view
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -18,57 +19,36 @@ import com.canonicalexamples.leagueApp.app.LeagueAppApp
 import com.canonicalexamples.leagueApp.databinding.ActivityLeagueBinding
 import com.canonicalexamples.leagueApp.databinding.ActivitySummonerDisplayBinding
 import com.canonicalexamples.leagueApp.model.SummonerService
-import com.canonicalexamples.leagueApp.viewmodels.LeagueActivityViewModel
-import com.canonicalexamples.leagueApp.viewmodels.LeagueActivityViewModelFactory
-import com.canonicalexamples.leagueApp.viewmodels.ServerListViewModel
-import com.canonicalexamples.leagueApp.viewmodels.ServerListViewModelFactory
+import com.canonicalexamples.leagueApp.viewmodels.*
 
 class SummonerDisplayActivity : AppCompatActivity() {
-    lateinit var serverHost: String
-    lateinit var serverHostShort: String
     private lateinit var binding: ActivitySummonerDisplayBinding
-    /*
-    private val viewModel: LeagueActivityViewModel by viewModels{
+
+    private val viewModel: SummonerDisplayViewModel by viewModels{
         val app = application as LeagueAppApp
-        LeagueActivityViewModelFactory(app.database)
+        SummonerDisplayViewModelFactory(app.database)
     }
-    */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_league)
         binding =  ActivitySummonerDisplayBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if(intent.getStringExtra("serverHost").isNullOrEmpty()){
+        /*Extraigo el servidor y lo introduzco en el viewmodel*/
+        loadData()
 
-        }else{
-            serverHost = intent.getStringExtra("serverHost") as String
-            serverHostShort = intent.getStringExtra("serverHostShort") as String
-            println("Server and host: " + serverHost + " " + serverHostShort)
-        }
+        println("*******************************************************")
+        println("Server and host: " + viewModel.serverSelected.value + " " + viewModel.serverSelectedHostShort.value)
+        println(viewModel.summonerName.value)
 
-        /*navegar a summoner selector*/
-        binding.buttonReturn.setOnClickListener {
+        /*Setup some view data*/
+
+        binding.returnFinder.setOnClickListener{
             val intent = Intent(this, SummonerFinderActivity::class.java)
-            intent.putExtra("serverHost", serverHost)
-            intent.putExtra("serverHostShort", serverHostShort)
             startActivity(intent)
-            //onActivityResult()
         }
 
-        var actionBar = supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-
-    }
-
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
-        return super.onContextItemSelected(item)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -85,6 +65,20 @@ class SummonerDisplayActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun loadData(){
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val savedServer = sharedPreferences.getString("SERVER_KEY", null)
+        val savedShort = sharedPreferences.getString("SHORT_KEY", null)
+        val savedSummonerName = sharedPreferences.getString("SNAME_KEY", null)
+
+        viewModel.loadData(savedServer, savedShort, savedSummonerName)
+    }
+    private fun loadSummonerName(): String?{
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val savedSummonerName = sharedPreferences.getString("SNAME_KEY", null)
+        return savedSummonerName
     }
 }
 
