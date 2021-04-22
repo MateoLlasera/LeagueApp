@@ -1,2 +1,4 @@
 /build
+*.cpp
+cpp/
 cpp/*.cpp
