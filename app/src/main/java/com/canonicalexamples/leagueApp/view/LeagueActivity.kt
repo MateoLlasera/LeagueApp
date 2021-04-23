@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
@@ -53,6 +54,11 @@ class LeagueActivity : AppCompatActivity() {
             val intent = Intent(this, ServerPanelActivity::class.java)
             startActivityForResult(intent, 1)
             //onActivityResult()
+        }
+
+        /*Mostrar informacion de uso*/
+        binding.infoButton.setOnClickListener {
+            Toast.makeText(applicationContext, "Select the desired server and search for a summoner!", Toast.LENGTH_LONG).show()
         }
 
         /*Mostrar el servidor en pantalla*/

@@ -13,6 +13,8 @@ interface ServerDao {
     suspend fun get(id: Int): Server?
     @Query("SELECT * FROM server_table WHERE serverHost = :host")
     suspend fun getByHost(host: String): Server?
+    @Query("SELECT * FROM server_table WHERE serverShort = :short")
+    suspend fun getByShort(short: String): Server?
     @Query("SELECT * FROM server_table")
     suspend fun fetchServers(): List<Server>
     @Update

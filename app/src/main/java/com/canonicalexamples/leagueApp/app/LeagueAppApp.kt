@@ -1,6 +1,7 @@
 package com.canonicalexamples.leagueApp.app
 
 import android.app.Application
+import com.canonicalexamples.leagueApp.model.RankStatus
 import com.canonicalexamples.leagueApp.model.Server
 import com.canonicalexamples.leagueApp.model.ServerDatabase
 import com.canonicalexamples.leagueApp.model.Summoner
@@ -40,7 +41,8 @@ class LeagueAppApp: Application() {
             database.serverDao.create(Server(serverId = 9, serverName = "LA North", serverHost = "la1.api.riotgames.com", serverShort = "LAN"))
             database.serverDao.create(Server(serverId = 10, serverName = "LA South", serverHost = "la2.api.riotgames.com", serverShort = "LAS"))
             database.serverDao.create(Server(serverId = 11, serverName = "Brazil", serverHost = "br1.api.riotgames.com", serverShort = "BR"))
-            database.summonerDao.create(Summoner(
+
+            /*database.summonerDao.create(Summoner(
                 id = "cRyauCyYoalCmLwnhcW25i1VLLJZKkKv380p3kpkf7HLGCU",
                 name = "deaki",
                 accountId = "uhWl0anuZiv7ynlvufCj5PG0UvaldLh59u7lvA7qHOFoqQ",
@@ -49,6 +51,8 @@ class LeagueAppApp: Application() {
                 summonerLevel = 313,
                 region = "EUW"
             ))
+             */
+            //database.rankStatusDao.create(RankStatus(id = "cRyauCyYoalCmLwnhcW25i1VLLJZKkKv380p3kpkf7HLGCU", queueType = "penepene"))
         }
     }
 }

@@ -32,6 +32,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/recent_search"
         app:layout_constraintVertical_bias="1.0"
-        app:navGraph="@navigation/nav_summoner" />
+        app:navGraph="@navigation/nav_summoner"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

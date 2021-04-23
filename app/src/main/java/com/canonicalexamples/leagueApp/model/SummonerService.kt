@@ -17,4 +17,6 @@ interface SummonerService {
     @GET("/lol/summoner/v4/summoners/by-name/{summonerName}")
     fun getSummonerAPI(@Path(value = "summonerName") summonerName: String, @Query("api_key") key: String): Call<Summoner>
 
+    @GET("/lol/league/v4/entries/by-summoner/{encryptedSummonerId}")
+    fun getSummonerRankAPI(@Path(value = "encryptedSummonerId") encryptedSummonerId: String, @Query("api_key") key: String): Call<List<RankStatus>>
 }

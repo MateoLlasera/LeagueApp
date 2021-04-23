@@ -4,12 +4,15 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.canonicalexamples.leagueApp.R
 import com.canonicalexamples.leagueApp.app.LeagueAppApp
 import com.canonicalexamples.leagueApp.databinding.ActivitySummonerFinderBinding
@@ -31,27 +34,39 @@ class SummonerFinderActivity: AppCompatActivity(){
 
         /*Extraigo el servidor y lo introduzco en el viewmodel*/
         loadData()
-        println("*******************************************************")
-        println("Server and host: " + viewModel.serverSelected.value + " " + viewModel.serverSelectedHostShort.value)
-        resources.getIdentifier("icon_0", "", packageName)
+        //println("*******************************************************")
+        //println("Server and host: " + viewModel.serverSelected.value + " " + viewModel.serverSelectedHostShort.value)
+
+        viewModel.getWaitDataBase().observe(this, Observer {
+            it.getContentIfNotHandled()?.let {showSplash ->
+                if(showSplash != null && showSplash) {
+                    val intent = Intent(this, SummonerDisplayActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        })
 
         viewModel.navigate.observe(this){ navigate ->
-            var aux = loadSummonerName()
-
-            if(aux.isNullOrEmpty()){
-                //Should never happen
-            }else{
-                var containsSummoner: Boolean = viewModel.containsSummoner(aux)
-                println("Summoner name is " + aux)
-                println("-----------------")
-                println("Constains is:$containsSummoner")
-            }
-
             if(navigate){
                 val intent = Intent(this, SummonerDisplayActivity::class.java)
                 startActivity(intent)
             }
         }
+
+        viewModel.fromRecycler.observe(this){ fromRecycler ->
+            if(fromRecycler){
+                saveDataRecycler(viewModel.auxShort.value, viewModel.getNameAux())
+                val intent = Intent(this, SummonerDisplayActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        viewModel.wrongServerOrSummoner.observe(this){ wrongServerOrSummoner ->
+            if(wrongServerOrSummoner){
+                Toast.makeText(applicationContext, "Summoner does not exist / wrong server selected", Toast.LENGTH_LONG).show()
+            }
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -68,7 +83,6 @@ class SummonerFinderActivity: AppCompatActivity(){
                 if (!p0.isNullOrEmpty()) {
                     saveSummonerName(p0)
                     viewModel.findSummoner(p0)
-                    viewModel.goToSummoner()
                 }
                 return true
             }
@@ -99,6 +113,8 @@ class SummonerFinderActivity: AppCompatActivity(){
         viewModel.loadData(savedServer, savedShort)
 
         sharedPreferences.edit().remove("SNAME_KEY").apply()
+        sharedPreferences.edit().remove("AUX_SERVER_KEY").apply()
+        sharedPreferences.edit().remove("AUX_NAME_KEY").apply()
         /*
         println("Server is " + savedServer)
         println("Name is " + savedName)
@@ -116,5 +132,14 @@ class SummonerFinderActivity: AppCompatActivity(){
         val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val savedSummonerName = sharedPreferences.getString("SNAME_KEY", null)
         return savedSummonerName
+    }
+
+    private fun saveDataRecycler(serverHost: String?, summonerName: String?){
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val sharedEditor = sharedPreferences.edit()
+        sharedEditor.apply{
+            putString("AUX_SERVER_KEY", serverHost)
+            putString("AUX_NAME_KEY", summonerName)
+        }.apply()
     }
 }
